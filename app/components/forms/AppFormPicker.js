@@ -19,8 +19,6 @@ import AppPicker from "../AppPicker";
 function AppFormPicker({ name, items, icon, placeholder, ...otherProps }) {
   const { setFieldValue, errors, touched, values } = useFormikContext();
 
-  const [modalVisible, setModalVisible] = useState(false);
-  const selectedItem = values[name];
   return (
     <>
       <AppPicker
@@ -28,25 +26,11 @@ function AppFormPicker({ name, items, icon, placeholder, ...otherProps }) {
         onSelectItem={(item) => setFieldValue(name, item)}
         placeholder={placeholder}
         selectedItem={values[name]}
+        {...otherProps}
       />
       <ErrorMessage error={errors[name]} visible={touched[name]} />
     </>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: defaultStyles.colors.light,
-    borderRadius: 25,
-    flexDirection: "row",
-    width: "100%",
-    padding: 15,
-    marginVertical: 10,
-  },
-  icon: {
-    marginRight: 10,
-  },
-  text: { flex: 1, color: defaultStyles.colors.placeholder },
-});
 
 export default AppFormPicker;

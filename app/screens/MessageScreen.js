@@ -34,8 +34,6 @@ function MessageScreen(props) {
   const [refreshing, setRefreshing] = useState(false);
 
   const handleDelete = (message) => {
-    console.log("MESSAGES VARIABLE", messages);
-    console.log("---------------------------------------------");
     setMessages(messages.filter((m) => m.id !== message.id));
     // delete the message from backend
   };
@@ -63,6 +61,7 @@ function MessageScreen(props) {
                 }}
               ></View>
             )}
+            showChevrons
           />
         )}
         ItemSeparatorComponent={ListItemSeparator}
