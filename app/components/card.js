@@ -1,7 +1,9 @@
 import React, { Fragment } from "react";
 import { Text, View, Image, StyleSheet } from "react-native";
-import colors from "../config/colors";
+
 import AppText from "./AppText";
+
+import defaultStyles from "../config/styles";
 
 function Card({ title, subtitle, image }) {
   return (
@@ -17,7 +19,7 @@ function Card({ title, subtitle, image }) {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: colors.white,
+    backgroundColor: defaultStyles.colors.white,
     borderRadius: 25,
     marginBottom: 20,
     overflow: "hidden",
@@ -27,7 +29,7 @@ const styles = StyleSheet.create({
     height: 200,
   },
   subtitle: {
-    color: colors.green,
+    color: defaultStyles.colors.green,
     fontSize: 16,
     fontWeight: "bold",
   },

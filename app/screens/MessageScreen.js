@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import { StyleSheet, FlatList } from "react-native";
-import ListItem from "../components/ListItem";
+import ListItem from "../components/lists/ListItem";
 import { View } from "react-native";
 
-import colors from "../config/colors";
 import AppView from "../components/AppView";
-import ListItemSeparator from "../components/ListItemSeparator";
-import ListItemDeleteAction from "../components/ListItemDeleteAction";
+import ListItemSeparator from "../components/lists/ListItemSeparator";
+import ListItemDeleteAction from "../components/lists/ListItemDeleteAction";
 
 const initialMessages = [
   {
@@ -19,12 +18,14 @@ const initialMessages = [
     id: 2,
     title: "Title 2",
     description: "this is a message",
+    image: require("../assets/macri.jpg"),
   },
   {
     id: 3,
     title: "Title 4",
     description:
       "this is a really really long message. Honestly, why does this have to be so freaking long... I don't know, maybe just to check how to handle overflow",
+    image: require("../assets/macri.jpg"),
   },
 ];
 

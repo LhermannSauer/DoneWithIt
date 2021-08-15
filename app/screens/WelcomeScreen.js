@@ -3,7 +3,7 @@ import React from "react";
 import { StyleSheet, View, Text, Image, ImageBackground } from "react-native";
 
 import AppButton from "../components/appButton";
-import colors from "../config/colors";
+import defaultStyles from "../config/styles";
 
 export default function WelcomeScreen() {
   const { width, height } = useDimensions();
@@ -19,7 +19,7 @@ export default function WelcomeScreen() {
         <Text style={styles.text}>Sell What You Don't Need</Text>
       </View>
       <AppButton title="LOGIN" />
-      <AppButton title="REGISTER" color={colors.secondary} />
+      <AppButton title="REGISTER" color={defaultStyles.colors.secondary} />
     </ImageBackground>
   );
 }
@@ -46,7 +46,7 @@ let styles = StyleSheet.create({
     height: 60,
     alignSelf: "center",
     width: "75%",
-    backgroundColor: colors.primary + "11",
+    backgroundColor: defaultStyles.colors.primary + "11",
     justifyContent: "center",
     marginBottom: 15,
     borderRadius: 20,
@@ -63,7 +63,7 @@ let styles = StyleSheet.create({
     borderWidth: 5,
     borderColor: "rgba(0,0,0,0.3)",
 
-    backgroundColor: colors.secondary + "55",
+    backgroundColor: defaultStyles.colors.secondary + "55",
   },
   text: {
     fontSize: 20,

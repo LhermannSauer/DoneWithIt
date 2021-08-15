@@ -1,6 +1,7 @@
 import React from "react";
 import { View } from "react-native";
-import colors from "../config/colors";
+
+import defaultStyles from "../../config/styles";
 
 function ListItemSeparator() {
   return (
@@ -8,7 +9,7 @@ function ListItemSeparator() {
       style={{
         width: "100%",
         height: 1.5,
-        backgroundColor: colors.light,
+        backgroundColor: defaultStyles.colors.light,
       }}
     />
   );

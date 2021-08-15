@@ -1,7 +1,9 @@
 import React from "react";
 import { Text, View, Image, StyleSheet } from "react-native";
-import colors from "../config/colors";
-import ListItem from "../components/ListItem";
+
+import defaultStyles from "../config/styles";
+
+import ListItem from "../components/lists/ListItem";
 import AppView from "../components/AppView";
 
 function ListingDetailsScreen({ title, subtitle, imagePath }) {
@@ -23,7 +25,7 @@ function ListingDetailsScreen({ title, subtitle, imagePath }) {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: colors.lightBackground,
+    backgroundColor: defaultStyles.colors.lightBackground,
     height: "100%",
   },
   image: {
@@ -37,7 +39,7 @@ const styles = StyleSheet.create({
     marginHorizontal: "5%",
   },
   price: {
-    color: colors.secondary,
+    color: defaultStyles.colors.secondary,
     fontSize: 20,
     fontWeight: "bold",
   },

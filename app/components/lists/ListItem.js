@@ -1,21 +1,16 @@
 import React from "react";
-import {
-  Image,
-  Text,
-  View,
-  StyleSheet,
-  TouchableOpacity,
-  TouchableHighlight,
-} from "react-native";
+import { Image, View, StyleSheet, TouchableHighlight } from "react-native";
 import { Swipeable } from "react-native-gesture-handler";
 
-import colors from "../config/colors";
-import AppText from "./AppText";
+import defaultStyles from "../../config/styles";
+import AppText from "../AppText";
 
 function ListItem({
   image,
+  Icon,
   title,
   subtitle,
+  style,
   onPress,
   renderRightActions,
   renderLeftActions,
@@ -25,12 +20,16 @@ function ListItem({
       renderRightActions={renderRightActions}
       renderLeftActions={renderLeftActions}
     >
-      <TouchableHighlight underlayColor={colors.light} onPress={onPress}>
-        <View style={styles.container}>
-          <Image source={image} style={styles.userImage} />
+      <TouchableHighlight
+        underlayColor={defaultStyles.colors.light}
+        onPress={onPress}
+      >
+        <View style={[styles.container, style]}>
+          {Icon && <Icon />}
+          {image && !Icon && <Image source={image} style={styles.userImage} />}
           <View style={styles.detailsText}>
             <AppText style={styles.title}>{title}</AppText>
-            <AppText style={styles.subtitle}>{subtitle}</AppText>
+            {subtitle && <AppText style={styles.subtitle}>{subtitle}</AppText>}
           </View>
         </View>
       </TouchableHighlight>
@@ -46,15 +45,14 @@ const styles = StyleSheet.create({
     overflow: "hidden",
   },
   detailsText: {
-    paddingLeft: 5,
-    paddingTop: 5,
+    paddingLeft: 10,
   },
   userImage: {
     width: 70,
     height: 70,
     borderRadius: 35,
     borderWidth: 2,
-    borderColor: colors.primary,
+    borderColor: defaultStyles.colors.primary,
   },
   title: {
     fontSize: 18,
@@ -62,7 +60,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   subtitle: {
-    color: colors.gray,
+    color: defaultStyles.colors.gray,
     fontSize: 16,
   },
 });

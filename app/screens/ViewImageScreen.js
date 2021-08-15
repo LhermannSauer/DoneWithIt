@@ -3,7 +3,8 @@ import React from "react";
 import { StyleSheet, View, Image } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-import colors from "../config/colors";
+import defaultStyles from "../config/styles";
+
 import AppView from "../components/AppView";
 
 export default function ViewImageScreen() {
@@ -14,13 +15,13 @@ export default function ViewImageScreen() {
       <MaterialCommunityIcons
         name="close"
         size={35}
-        color={colors.gray}
+        color={defaultStyles.colors.gray}
         style={styles.close}
       />
       <MaterialCommunityIcons
         name="trash-can-outline"
         size={35}
-        color={colors.gray}
+        color={defaultStyles.colors.gray}
         style={styles.delete}
       />
       <Image

@@ -1,14 +1,14 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { Text, StyleSheet, TouchableHighlight } from "react-native";
 
-import colors from "../config/colors";
+import defaultStyles from "../config/styles";
 
 function AppButton({ title, onPress, color }) {
   return (
     <TouchableHighlight
       style={[
         styles.button,
-        { backgroundColor: color ? color : colors.primary },
+        { backgroundColor: color ? color : defaultStyles.colors.primary },
       ]}
       onPress={onPress}
     >
@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 24,
     textAlign: "center",
-    color: colors.white,
+    color: defaultStyles.colors.white,
     letterSpacing: 6,
     fontWeight: "bold",
   },
