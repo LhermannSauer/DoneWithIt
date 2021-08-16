@@ -3,7 +3,7 @@ import { Text, StyleSheet, TouchableHighlight } from "react-native";
 
 import defaultStyles from "../config/styles";
 
-function AppButton({ title, onPress, color }) {
+function Button({ title, onPress, color }) {
   return (
     <TouchableHighlight
       style={[
@@ -37,4 +37,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AppButton;
+export default Button;

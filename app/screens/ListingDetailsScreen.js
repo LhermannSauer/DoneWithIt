@@ -4,11 +4,11 @@ import { Text, View, Image, StyleSheet } from "react-native";
 import defaultStyles from "../config/styles";
 
 import ListItem from "../components/lists/ListItem";
-import AppView from "../components/AppView";
+import Screen from "../components/Screen";
 
 function ListingDetailsScreen({ title, subtitle, imagePath }) {
   return (
-    <AppView style={styles.container}>
+    <Screen style={styles.container}>
       <Image source={require("../assets/jacket.jpg")} style={styles.image} />
       <View style={styles.textContainer}>
         <Text style={styles.title}>Red Jacket for Sale</Text>
@@ -19,7 +19,7 @@ function ListingDetailsScreen({ title, subtitle, imagePath }) {
         title={"Macri Liberal"}
         subtitle={"5 Listings"}
       />
-    </AppView>
+    </Screen>
   );
 }
 

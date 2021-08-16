@@ -4,8 +4,8 @@ import { StyleSheet, FlatList, View } from "react-native";
 import defaultStyles from "../config/styles";
 
 import ListItem from "../components/lists/ListItem";
-import AppView from "../components/AppView";
-import AppIcon from "../components/AppIcon";
+import Screen from "../components/Screen";
+import Icon from "../components/Icon";
 import ListItemSeparator from "../components/lists/ListItemSeparator";
 
 const menuItems = [
@@ -41,7 +41,7 @@ const menuItems = [
 
 function AccountScreen(props) {
   return (
-    <AppView style={styles.container}>
+    <Screen style={styles.container}>
       <ListItem
         image={require("../assets/macri.jpg")}
         title={"Macri Liberal"}
@@ -57,7 +57,7 @@ function AccountScreen(props) {
               title={item.title}
               onPress={item.onPress}
               Icon={() => (
-                <AppIcon
+                <Icon
                   backgroundColor={item.Icon.backgroundColor}
                   size={item.Icon.size}
                   icon={item.Icon.icon}
@@ -75,7 +75,7 @@ function AccountScreen(props) {
         title="Log Out"
         onPress={() => console.log(item)}
         Icon={() => (
-          <AppIcon
+          <Icon
             backgroundColor={defaultStyles.colors.yellow}
             size={50}
             icon="logout"
@@ -84,14 +84,14 @@ function AccountScreen(props) {
         )}
         style={[styles.option, { marginTop: 35 }]}
       />
-    </AppView>
+    </Screen>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     marginTop: 35,
-    backgroundColor: defaultStyles.colors.light,
+    backgroundColor: defaultStyles.colors.lightBackground,
   },
   user: {
     alignItems: "center",

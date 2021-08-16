@@ -2,7 +2,8 @@ import React from "react";
 import { Image, StyleSheet } from "react-native";
 import * as Yup from "yup";
 
-import AppView from "../components/AppView";
+import Screen from "../components/Screen";
+import CategoryPickerItem from "../components/CategoryPickerItem";
 import {
   AppForm,
   AppFormField,
@@ -31,7 +32,7 @@ const categories = [
 
 function ListingEditScreen(props) {
   return (
-    <AppView style={styles.container}>
+    <Screen style={styles.container}>
       <AppForm
         initialValues={{
           title: "",
@@ -60,6 +61,8 @@ function ListingEditScreen(props) {
         <AppFormPicker
           items={categories}
           placeholder="Category"
+          numberOfColumns={3}
+          PickerItemComponent={CategoryPickerItem}
           name="category"
           width={"50%"}
           iconOptions
@@ -76,13 +79,14 @@ function ListingEditScreen(props) {
         />
         <SubmitButton title="Post" />
       </AppForm>
-    </AppView>
+    </Screen>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    marginHorizontal: 15,
+    paddingHorizontal: 15,
+    backgroundColor: defaultStyles.colors.lightBackground,
   },
 });
 

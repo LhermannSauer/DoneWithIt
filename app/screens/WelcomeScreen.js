@@ -2,7 +2,7 @@ import { useDimensions } from "@react-native-community/hooks";
 import React from "react";
 import { StyleSheet, View, Text, Image, ImageBackground } from "react-native";
 
-import AppButton from "../components/appButton";
+import Button from "../components/Button";
 import defaultStyles from "../config/styles";
 
 export default function WelcomeScreen() {
@@ -18,8 +18,8 @@ export default function WelcomeScreen() {
         <Image source={require("../assets/logo-red.png")} style={styles.logo} />
         <Text style={styles.text}>Sell What You Don't Need</Text>
       </View>
-      <AppButton title="LOGIN" />
-      <AppButton title="REGISTER" color={defaultStyles.colors.secondary} />
+      <Button title="LOGIN" />
+      <Button title="REGISTER" color={defaultStyles.colors.secondary} />
     </ImageBackground>
   );
 }
@@ -28,6 +28,7 @@ let styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "flex-end",
+    backgroundColor: defaultStyles.colors.lightBackground,
   },
   logoContainer: {
     width: "100%",

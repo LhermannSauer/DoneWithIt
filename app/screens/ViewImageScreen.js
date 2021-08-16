@@ -5,13 +5,13 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import defaultStyles from "../config/styles";
 
-import AppView from "../components/AppView";
+import Screen from "../components/Screen";
 
 export default function ViewImageScreen() {
   const { width, height } = useDimensions();
 
   return (
-    <AppView style={styles.container}>
+    <Screen style={styles.container}>
       <MaterialCommunityIcons
         name="close"
         size={35}
@@ -29,13 +29,14 @@ export default function ViewImageScreen() {
         style={styles.image}
         resizeMode="contain"
       />
-    </AppView>
+    </Screen>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#000",
+    backgroundColor: defaultStyles.colors.darkBackground,
+
     flex: 1,
   },
   image: {

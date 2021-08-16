@@ -2,7 +2,7 @@ import React from "react";
 import { SafeAreaView } from "react-native";
 import Constants from "expo-constants";
 
-function AppView({ children, style }) {
+function Screen({ children, style }) {
   return (
     <SafeAreaView
       style={{
@@ -16,4 +16,4 @@ function AppView({ children, style }) {
   );
 }
 
-export default AppView;
+export default Screen;

@@ -2,21 +2,21 @@ import React from "react";
 import { TouchableOpacity, StyleSheet } from "react-native";
 
 import defaultStyles from "../config/styles";
-import AppIcon from "./AppIcon";
+import Icon from "./Icon";
 import AppText from "./AppText";
 
-function AppIconOption({ color, icon, onPress, label }) {
+function CategoryPickerItem({ item, onPress }) {
   return (
     <TouchableOpacity style={styles.container} onPress={onPress}>
-      <AppIcon
-        icon={icon}
-        backgroundColor={color}
+      <Icon
+        icon={item.icon}
+        backgroundColor={item.color}
         style={styles.icon}
         size={75}
         iconColor={defaultStyles.colors.white}
       />
       <AppText style={[defaultStyles.text, styles.text]} numberOfLines={2}>
-        {label}
+        {item.label}
       </AppText>
     </TouchableOpacity>
   );
@@ -24,7 +24,7 @@ function AppIconOption({ color, icon, onPress, label }) {
 
 const styles = StyleSheet.create({
   container: {
-    width: 90,
+    width: "33%",
     alignItems: "center",
     flex: 1,
     marginBottom: 25,
@@ -35,4 +35,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AppIconOption;
+export default CategoryPickerItem;

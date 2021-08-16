@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet, View } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-function AppIcon({ icon, size = 50, backgroundColor, iconColor }) {
+function Icon({ icon, size = 50, backgroundColor, iconColor }) {
   return (
     <View
       style={{
@@ -27,4 +27,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AppIcon;
+export default Icon;

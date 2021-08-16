@@ -3,9 +3,10 @@ import { StyleSheet, FlatList } from "react-native";
 import ListItem from "../components/lists/ListItem";
 import { View } from "react-native";
 
-import AppView from "../components/AppView";
+import Screen from "../components/Screen";
 import ListItemSeparator from "../components/lists/ListItemSeparator";
 import ListItemDeleteAction from "../components/lists/ListItemDeleteAction";
+import defaultStyles from "../config/styles";
 
 const initialMessages = [
   {
@@ -39,7 +40,7 @@ function MessageScreen(props) {
   };
 
   return (
-    <AppView>
+    <Screen style={styles.container}>
       <FlatList
         style={styles.list}
         data={messages}
@@ -70,12 +71,15 @@ function MessageScreen(props) {
           setMessages(initialMessages);
         }}
       ></FlatList>
-    </AppView>
+    </Screen>
   );
 }
 
 export default MessageScreen;
 
 const styles = StyleSheet.create({
+  container: {
+    backgroundColor: defaultStyles.colors.lightBackground,
+  },
   list: {},
 });

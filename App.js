@@ -4,12 +4,12 @@ import AccountScreen from "./app/screens/AccountScreen";
 import ListingDetailsScreen from "./app/screens/ListingDetailsScreen";
 import ListingEditScreen from "./app/screens/ListingEditScreen";
 import ListingsScreen from "./app/screens/ListingsScreen";
-import LogingScreen from "./app/screens/LogingScreen";
+import LoginScreen from "./app/screens/LoginScreen";
 import MessageScreen from "./app/screens/MessageScreen";
 import RegisterScreen from "./app/screens/RegisterScreen";
 import ViewImageScreen from "./app/screens/ViewImageScreen";
 import WelcomeScreen from "./app/screens/WelcomeScreen";
 
 export default function App() {
-  return <ListingEditScreen />;
+  return <WelcomeScreen />;
 }

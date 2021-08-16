@@ -11,24 +11,25 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import defaultStyles from "../config/styles";
 import AppText from "./AppText";
-import PickerItem from "./pickerItem";
-import AppIconOption from "./AppIconOption";
+import PickerItem from "./PickerItem";
+import CategoryPickerItem from "./CategoryPickerItem";
 
-function AppPicker({
+function Picker({
   icon,
   items,
+  numberOfColumns = 1,
   onSelectItem,
-  iconOptions,
+  PickerItemComponent = PickerItem,
   placeholder,
   selectedItem,
-  width,
+  width = "100%",
 }) {
   const [modalVisible, setModalVisible] = useState(false);
 
   return (
     <>
       <TouchableWithoutFeedback onPress={() => setModalVisible(true)}>
-        <View style={[styles.container, { width: width ? width : "100%" }]}>
+        <View style={[styles.container, { width: width }]}>
           {icon && (
             <MaterialCommunityIcons
               name={icon}
@@ -58,40 +59,21 @@ function AppPicker({
       </TouchableWithoutFeedback>
       <Modal visible={modalVisible} animationType={"slide"}>
         <Button title="Close" onPress={() => setModalVisible(false)} />
-        {!iconOptions && (
-          <FlatList
-            data={items}
-            keyExtractor={(item) => item.value.toString()}
-            renderItem={({ item }) => (
-              <PickerItem
-                label={item.label}
-                onPress={() => {
-                  setModalVisible(false);
-                  onSelectItem(item);
-                }}
-              />
-            )}
-          />
-        )}
-        {iconOptions && (
-          <FlatList
-            data={items}
-            keyExtractor={(item) => item.value.toString()}
-            numColumns={3}
-            renderItem={({ item }) => (
-              <AppIconOption
-                label={item.label}
-                icon={item.icon}
-                color={item.color}
-                onPress={() => {
-                  setModalVisible(false);
-                  onSelectItem(item);
-                }}
-              />
-            )}
-            style={styles.iconList}
-          />
-        )}
+        <FlatList
+          data={items}
+          keyExtractor={(item) => item.value.toString()}
+          numColumns={numberOfColumns}
+          renderItem={({ item }) => (
+            <PickerItemComponent
+              item={item}
+              onPress={() => {
+                setModalVisible(false);
+                onSelectItem(item);
+              }}
+            />
+          )}
+          style={styles.categoryList}
+        />
       </Modal>
     </>
   );
@@ -114,9 +96,12 @@ const styles = StyleSheet.create({
     padding: 15,
     flex: 1,
   },
+  categoryList: {
+    backgroundColor: "#59D5",
+  },
   text: {
     flex: 1,
   },
 });
 
-export default AppPicker;
+export default Picker;

@@ -10,8 +10,8 @@ export default {
   dark: "#0C0C0C",
   black: "#000",
   placeholder: "#888888",
-  lightBackground: "#D1D1FF",
-  darkBackground: "#222259",
+  lightBackground: "#F1E9E5",
+  darkBackground: "#222",
   alphaBB: "BB",
   warning: "#CC3300",
 };
