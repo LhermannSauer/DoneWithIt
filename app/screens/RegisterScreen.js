@@ -3,7 +3,7 @@ import { StyleSheet, Image } from "react-native";
 import * as Yup from "yup";
 
 import Screen from "../components/Screen";
-import { AppFormField, AppForm, SubmitButton } from "../components/forms";
+import { FormField, Form, SubmitButton } from "../components/forms";
 import defaultStyles from "../config/styles";
 
 const validationSchema = Yup.object().shape({
@@ -15,12 +15,12 @@ const validationSchema = Yup.object().shape({
 function RegisterScreen(props) {
   return (
     <Screen style={styles.container}>
-      <AppForm
+      <Form
         initialValues={{ name: "", email: "", password: "" }}
         onSubmit={(values) => console.log(values)}
         validationSchema={validationSchema}
       >
-        <AppFormField
+        <FormField
           allowFontScaling
           autoCapitalize="words"
           icon="account"
@@ -28,7 +28,7 @@ function RegisterScreen(props) {
           placeholder="name"
           textContentType="username"
         />
-        <AppFormField
+        <FormField
           allowFontScaling
           icon="email"
           keyboardType="email-address"
@@ -36,7 +36,7 @@ function RegisterScreen(props) {
           placeholder="email"
           textContentType="emailAddress"
         />
-        <AppFormField
+        <FormField
           allowFontScaling
           icon="lock"
           name="password"
@@ -45,7 +45,7 @@ function RegisterScreen(props) {
           textContentType="password"
         />
         <SubmitButton title="Register" color={defaultStyles.colors.secondary} />
-      </AppForm>
+      </Form>
     </Screen>
   );
 }
@@ -53,6 +53,7 @@ function RegisterScreen(props) {
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 15,
+    justifyContent: "center",
     backgroundColor: defaultStyles.colors.lightBackground,
   },
 });

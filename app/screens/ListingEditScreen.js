@@ -1,21 +1,25 @@
 import React from "react";
-import { Image, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import * as Yup from "yup";
 
+import defaultStyles from "../config/styles";
 import Screen from "../components/Screen";
 import CategoryPickerItem from "../components/CategoryPickerItem";
 import {
-  AppForm,
-  AppFormField,
+  Form,
+  FormField,
   SubmitButton,
-  AppFormPicker,
+  FormPicker,
+  FormImagePicker,
 } from "../components/forms";
+import useLocation from "../hooks/useLocation";
 
 const validationSchema = Yup.object().shape({
   title: Yup.string().required().min(5).label("Title"),
   price: Yup.number().required().positive().max(10000).label("Price"),
   category: Yup.object().required().nullable().label("Category"),
   description: Yup.string().min(20),
+  images: Yup.array().min(1, "Please select at least one image"),
 });
 
 const categories = [
@@ -31,19 +35,23 @@ const categories = [
 ];
 
 function ListingEditScreen(props) {
+  const location = useLocation();
+
   return (
     <Screen style={styles.container}>
-      <AppForm
+      <Form
         initialValues={{
           title: "",
           price: "",
           category: null,
           description: "",
+          images: [],
         }}
-        onSubmit={(values) => console.log(values)}
+        onSubmit={(values) => console.log(values, location)}
         validationSchema={validationSchema}
       >
-        <AppFormField
+        <FormImagePicker name="images" />
+        <FormField
           maxLength={255}
           autoCapitalize="sentences"
           autoCorrect
@@ -51,14 +59,14 @@ function ListingEditScreen(props) {
           name="title"
           placeholder="Title"
         />
-        <AppFormField
+        <FormField
           maxLength={8}
           keyboardType="decimal-pad"
           name="price"
           placeholder="Price"
           width={"40%"}
         />
-        <AppFormPicker
+        <FormPicker
           items={categories}
           placeholder="Category"
           numberOfColumns={3}
@@ -68,7 +76,7 @@ function ListingEditScreen(props) {
           iconOptions
         />
 
-        <AppFormField
+        <FormField
           maxLength={255}
           autoCapitalize="sentences"
           autoCorrect
@@ -78,7 +86,7 @@ function ListingEditScreen(props) {
           numberOfLines={6}
         />
         <SubmitButton title="Post" />
-      </AppForm>
+      </Form>
     </Screen>
   );
 }
