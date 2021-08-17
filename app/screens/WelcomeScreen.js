@@ -1,4 +1,4 @@
-import { useDimensions } from "@react-native-community/hooks";
+import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { StyleSheet, View, Text, Image, ImageBackground } from "react-native";
 
@@ -6,7 +6,15 @@ import Button from "../components/Button";
 import defaultStyles from "../config/styles";
 
 export default function WelcomeScreen() {
-  const { width, height } = useDimensions();
+  const navigation = useNavigation();
+
+  const navigateToLogin = () => {
+    navigation.navigate("Login");
+  };
+
+  const navigateToRegister = () => {
+    navigation.navigate("Register");
+  };
 
   return (
     <ImageBackground
@@ -18,8 +26,12 @@ export default function WelcomeScreen() {
         <Image source={require("../assets/logo-red.png")} style={styles.logo} />
         <Text style={styles.text}>Sell What You Don't Need</Text>
       </View>
-      <Button title="LOGIN" />
-      <Button title="REGISTER" color={defaultStyles.colors.secondary} />
+      <Button title="LOGIN" onPress={() => navigateToLogin()} />
+      <Button
+        title="REGISTER"
+        color={defaultStyles.colors.secondary}
+        onPress={() => navigateToRegister()}
+      />
     </ImageBackground>
   );
 }

@@ -15,6 +15,7 @@ const validationSchema = Yup.object().shape({
 function RegisterScreen(props) {
   return (
     <Screen style={styles.container}>
+      <Image source={require("../assets/logo-red.png")} style={styles.logo} />
       <Form
         initialValues={{ name: "", email: "", password: "" }}
         onSubmit={(values) => console.log(values)}
@@ -53,8 +54,14 @@ function RegisterScreen(props) {
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 15,
-    justifyContent: "center",
     backgroundColor: defaultStyles.colors.lightBackground,
+    alignItems: "center",
+  },
+  logo: {
+    marginTop: 45,
+    width: 80,
+    height: 80,
+    marginBottom: 15,
   },
 });
 
