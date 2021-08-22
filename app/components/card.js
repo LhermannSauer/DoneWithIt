@@ -5,10 +5,10 @@ import AppText from "./AppText";
 
 import defaultStyles from "../config/styles";
 
-function Card({ title, subtitle, image }) {
+function Card({ title, subtitle, imageUrl }) {
   return (
     <View style={styles.container}>
-      <Image source={image} style={styles.image} />
+      <Image source={{ uri: imageUrl }} style={styles.image} />
       <View style={styles.textContainer}>
         <AppText style={styles.title} numberOfLines={1}>
           {title}

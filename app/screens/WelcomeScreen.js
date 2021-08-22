@@ -4,18 +4,9 @@ import { StyleSheet, View, Text, Image, ImageBackground } from "react-native";
 
 import Button from "../components/Button";
 import defaultStyles from "../config/styles";
+import routes from "../navigation/routes";
 
-export default function WelcomeScreen() {
-  const navigation = useNavigation();
-
-  const navigateToLogin = () => {
-    navigation.navigate("Login");
-  };
-
-  const navigateToRegister = () => {
-    navigation.navigate("Register");
-  };
-
+export default function WelcomeScreen({ navigation }) {
   return (
     <ImageBackground
       source={require("../assets/background.jpg")}
@@ -26,11 +17,11 @@ export default function WelcomeScreen() {
         <Image source={require("../assets/logo-red.png")} style={styles.logo} />
         <Text style={styles.text}>Sell What You Don't Need</Text>
       </View>
-      <Button title="LOGIN" onPress={() => navigateToLogin()} />
+      <Button title="LOGIN" onPress={() => navigation.navigate(routes.LOGIN)} />
       <Button
         title="REGISTER"
         color={defaultStyles.colors.secondary}
-        onPress={() => navigateToRegister()}
+        onPress={() => navigation.navigate(routes.REGISTER)}
       />
     </ImageBackground>
   );

@@ -6,13 +6,15 @@ import defaultStyles from "../config/styles";
 import ListItem from "../components/lists/ListItem";
 import Screen from "../components/Screen";
 
-function ListingDetailsScreen({ title, subtitle, imagePath }) {
+function ListingDetailsScreen(props) {
+  const { price, image, title } = props.route.params.listing;
+
   return (
     <Screen style={styles.container}>
-      <Image source={require("../assets/jacket.jpg")} style={styles.image} />
+      <Image source={image} style={styles.image} />
       <View style={styles.textContainer}>
-        <Text style={styles.title}>Red Jacket for Sale</Text>
-        <Text style={styles.price}>$200</Text>
+        <Text style={styles.title}>{title}</Text>
+        <Text style={styles.price}>{`$${price}`}</Text>
       </View>
       <ListItem
         image={require("../assets/macri.jpg")}

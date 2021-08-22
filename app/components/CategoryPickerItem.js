@@ -10,13 +10,13 @@ function CategoryPickerItem({ item, onPress }) {
     <TouchableOpacity style={styles.container} onPress={onPress}>
       <Icon
         icon={item.icon}
-        backgroundColor={item.color}
+        backgroundColor={item.backgroundColor}
         style={styles.icon}
         size={75}
-        iconColor={defaultStyles.colors.white}
+        iconColor={item.color}
       />
       <AppText style={[defaultStyles.text, styles.text]} numberOfLines={2}>
-        {item.label}
+        {item.name}
       </AppText>
     </TouchableOpacity>
   );

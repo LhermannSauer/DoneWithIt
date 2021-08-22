@@ -48,7 +48,7 @@ function Picker({
               },
             ]}
           >
-            {selectedItem ? selectedItem.label : placeholder}
+            {selectedItem ? selectedItem.name : placeholder}
           </AppText>
           <MaterialCommunityIcons
             name={"chevron-down"}
@@ -61,7 +61,7 @@ function Picker({
         <Button title="Close" onPress={() => setModalVisible(false)} />
         <FlatList
           data={items}
-          keyExtractor={(item) => item.value.toString()}
+          keyExtractor={(item) => item.id.toString()}
           numColumns={numberOfColumns}
           renderItem={({ item }) => (
             <PickerItemComponent

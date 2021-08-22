@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet } from "react-native";
 import * as Yup from "yup";
 
@@ -12,7 +12,11 @@ import {
   FormPicker,
   FormImagePicker,
 } from "../components/forms";
+import categoriesApi from "../api/categories";
 import useLocation from "../hooks/useLocation";
+import useApi from "../hooks/useApi";
+import listingsApi from "../api/listings";
+import UploadScreen from "./UploadScreen";
 
 const validationSchema = Yup.object().shape({
   title: Yup.string().required().min(5).label("Title"),
@@ -22,23 +26,39 @@ const validationSchema = Yup.object().shape({
   images: Yup.array().min(1, "Please select at least one image"),
 });
 
-const categories = [
-  { value: 1, label: "Furniture", icon: "floor-lamp", color: "#fc5c65" },
-  { value: 2, label: "Cars", icon: "car", color: "#fd9644" },
-  { value: 3, label: "Cameras", icon: "camera", color: "#fed330" },
-  { value: 4, label: "Games", icon: "cards", color: "#26de81" },
-  { value: 5, label: "Clothing", icon: "shoe-heel", color: "#2bcbba" },
-  { value: 6, label: "Sports", icon: "basketball", color: "#45aaf2" },
-  { value: 7, label: "Movies & Music", icon: "headphones", color: "#4b7bec" },
-  { value: 8, label: "Books", icon: "book", color: "#fc5c65" },
-  { value: 9, label: "Other", icon: "crosshairs-question", color: "#fd9644" },
-];
-
-function ListingEditScreen(props) {
+function ListingEditScreen({ navigation }) {
+  const getCategories = useApi(categoriesApi.getCategories);
   const location = useLocation();
+  const [uploadVisible, setUploadVisible] = useState(false);
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    getCategories.request();
+  }, []);
+
+  const handleSubmit = async (listing, { resetForm }) => {
+    setProgress(0);
+    setUploadVisible(true);
+    const result = await listingsApi.postListing(
+      { ...listing, location },
+      (progress) => setProgress(progress)
+    );
+
+    if (!result.ok) {
+      setUploadVisible(false);
+      return alert("Coult not save the listing.");
+    }
+
+    resetForm();
+  };
 
   return (
     <Screen style={styles.container}>
+      <UploadScreen
+        progress={progress}
+        visible={uploadVisible}
+        onDone={() => setUploadVisible(false)}
+      />
       <Form
         initialValues={{
           title: "",
@@ -47,7 +67,7 @@ function ListingEditScreen(props) {
           description: "",
           images: [],
         }}
-        onSubmit={(values) => console.log(values, location)}
+        onSubmit={handleSubmit}
         validationSchema={validationSchema}
       >
         <FormImagePicker name="images" />
@@ -67,7 +87,7 @@ function ListingEditScreen(props) {
           width={"40%"}
         />
         <FormPicker
-          items={categories}
+          items={getCategories.data}
           placeholder="Category"
           numberOfColumns={3}
           PickerItemComponent={CategoryPickerItem}

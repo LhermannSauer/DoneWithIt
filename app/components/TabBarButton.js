@@ -1,24 +1,30 @@
 import React from "react";
-import { View, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import colors from "../config/colors";
 import Icon from "./Icon";
 
-function TabBarButton({ size = 50 }) {
+function TabBarButton({
+  size = 75,
+  iconColor = colors.primary,
+  backgroundColor = colors.light,
+}) {
   return (
-    <View style={styles.container}>
-      <Icon
-        iconColor={colors.white}
-        backgroundColor={colors.primary}
-        icon="plus-circle"
-        size={size}
-      />
-    </View>
+    <Icon
+      iconColor={iconColor}
+      backgroundColor={backgroundColor}
+      icon="plus-circle"
+      size={size}
+      style={styles.icon}
+    />
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    padding: 50,
+    backgroundColor: colors.light,
+  },
+  icon: {
+    bottom: 25,
   },
 });
 

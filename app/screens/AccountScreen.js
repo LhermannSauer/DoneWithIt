@@ -7,11 +7,12 @@ import ListItem from "../components/lists/ListItem";
 import Screen from "../components/Screen";
 import Icon from "../components/Icon";
 import ListItemSeparator from "../components/lists/ListItemSeparator";
+import routes from "../navigation/routes";
 
 const menuItems = [
   {
     title: "My Listings",
-    onPress: () => console.log(item),
+    navigateTo: routes.FEED,
     Icon: {
       backgroundColor: defaultStyles.colors.primary,
       size: 50,
@@ -25,7 +26,7 @@ const menuItems = [
   },
   {
     title: "My Messages",
-    onPress: () => console.log(item),
+    navigateTo: routes.MESSAGES,
     Icon: {
       backgroundColor: defaultStyles.colors.secondary,
       size: 50,
@@ -39,7 +40,7 @@ const menuItems = [
   },
 ];
 
-function AccountScreen(props) {
+function AccountScreen({ navigation }) {
   return (
     <Screen style={styles.container}>
       <ListItem
@@ -55,7 +56,7 @@ function AccountScreen(props) {
           renderItem={({ item }) => (
             <ListItem
               title={item.title}
-              onPress={item.onPress}
+              onPress={() => navigation.navigate(item.navigateTo)}
               Icon={() => (
                 <Icon
                   backgroundColor={item.Icon.backgroundColor}
@@ -73,7 +74,7 @@ function AccountScreen(props) {
 
       <ListItem
         title="Log Out"
-        onPress={() => console.log(item)}
+        onPress={() => navigation.navigate("Auth")}
         Icon={() => (
           <Icon
             backgroundColor={defaultStyles.colors.yellow}

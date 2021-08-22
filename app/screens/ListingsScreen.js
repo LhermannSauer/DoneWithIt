@@ -1,44 +1,63 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import {
+  View,
+  FlatList,
+  StyleSheet,
+  TouchableWithoutFeedback,
+} from "react-native";
+
+import ActivityIndicator from "../components/ActivityIndicator";
+import Button from "../components/Button";
 import Card from "../components/Card";
-import Screen from "../components/Screen";
-import { FlatList, StyleSheet, TouchableWithoutFeedback } from "react-native";
 import defaultStyles from "../config/styles";
-import { useNavigation } from "@react-navigation/native";
+import listingsApi from "../api/listings";
+import Screen from "../components/Screen";
+import routes from "../navigation/routes";
+import AppText from "../components/AppText";
+import useApi from "../hooks/useApi";
 
-const listings = [
-  {
-    id: 1,
-    image: require("../assets/jacket.jpg"),
-    title: "Red Jacket for Sale",
-    price: 100,
-  },
-  {
-    id: 2,
-    image: require("../assets/couch.jpg"),
-    title: "Couch in great condition",
-    price: 1000,
-  },
-];
+function ListingsScreen({ navigation }) {
+  const [refreshing, setRefreshing] = useState(false);
 
-function ListingsScreen(props) {
-  const navigation = useNavigation();
+  //When using multiple Apifunctions, do not destructure the response, leave it as GetXXXXApi
+  const {
+    data: listings,
+    error,
+    loading,
+    request: loadListings,
+  } = useApi(listingsApi.getListings);
 
-  const toListingDetails = () => {
-    navigation.navigate("listingDetails");
-  };
+  useEffect(() => {
+    loadListings();
+  }, []);
 
   return (
     <Screen style={styles.container}>
+      {error && (
+        <>
+          <AppText>Couldn't retrieve the listings.</AppText>
+          <Button title="Retry" onPress={loadListings} />
+        </>
+      )}
+      <ActivityIndicator visible={loading} />
       <FlatList
         data={listings}
+        refreshing={refreshing}
+        onRefresh={() => loadListings()}
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
-          <TouchableWithoutFeedback onPress={() => toListingDetails()}>
-            <Card
-              title={item.title}
-              subtitle={`$ ${item.price}`}
-              image={item.image}
-            />
+          <TouchableWithoutFeedback
+            onPress={() =>
+              navigation.navigate(routes.LISTING_DETAILS, { listing: item })
+            }
+          >
+            <View>
+              <Card
+                title={item.title}
+                subtitle={`$ ${item.price}`}
+                imageUrl={item.images[0].url}
+              />
+            </View>
           </TouchableWithoutFeedback>
         )}
       />
