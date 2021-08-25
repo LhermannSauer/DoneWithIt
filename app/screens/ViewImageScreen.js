@@ -7,9 +7,7 @@ import defaultStyles from "../config/styles";
 
 import Screen from "../components/Screen";
 
-export default function ViewImageScreen() {
-  const { width, height } = useDimensions();
-
+export default function ViewImageScreen(image) {
   return (
     <Screen style={styles.container}>
       <MaterialCommunityIcons
@@ -24,11 +22,7 @@ export default function ViewImageScreen() {
         color={defaultStyles.colors.gray}
         style={styles.delete}
       />
-      <Image
-        source={require("../assets/chair.jpg")}
-        style={styles.image}
-        resizeMode="contain"
-      />
+      <Image source={image} style={styles.image} resizeMode="contain" />
     </Screen>
   );
 }

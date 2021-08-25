@@ -10,6 +10,7 @@ import * as ImagePicker from "expo-image-picker";
 
 import defaultStyles from "../config/styles";
 import Icon from "./Icon";
+import logger from "../utility/log";
 
 function ImageInput({ imageUri, onChangeImage, style }) {
   const requestCameraPermission = async () => {
@@ -38,7 +39,7 @@ function ImageInput({ imageUri, onChangeImage, style }) {
       });
       if (!cancelled) onChangeImage(uri);
     } catch (e) {
-      console.log("Error reading an image", error);
+      logger.log("Error reading an image", error);
     }
   };
 

@@ -1,27 +1,48 @@
 import React from "react";
-import { Text, View, Image, StyleSheet } from "react-native";
-
+import {
+  Text,
+  View,
+  StyleSheet,
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+} from "react-native";
+import { Image } from "react-native-expo-image-cache";
 import defaultStyles from "../config/styles";
 
 import ListItem from "../components/lists/ListItem";
 import Screen from "../components/Screen";
+import ContactSellerForm from "../components/ContactSellerForm";
 
-function ListingDetailsScreen(props) {
-  const { price, image, title } = props.route.params.listing;
+function ListingDetailsScreen({ route }) {
+  const listing = route.params.listing;
 
   return (
-    <Screen style={styles.container}>
-      <Image source={image} style={styles.image} />
-      <View style={styles.textContainer}>
-        <Text style={styles.title}>{title}</Text>
-        <Text style={styles.price}>{`$${price}`}</Text>
-      </View>
-      <ListItem
-        image={require("../assets/macri.jpg")}
-        title={"Macri Liberal"}
-        subtitle={"5 Listings"}
-      />
-    </Screen>
+    <ScrollView keyboardShouldPersistTaps="handled">
+      <KeyboardAvoidingView
+        behavior="position"
+        keyboardVerticalOffset={Platform.OS === "ios" ? 0 : 70}
+      >
+        <Screen style={styles.container}>
+          <Image
+            uri={listing.images[0].url}
+            style={styles.image}
+            tint="light"
+            preview={{ uri: listing.images[0].thumbnailUrl }}
+          />
+          <View style={styles.textContainer}>
+            <Text style={styles.title}>{listing.title}</Text>
+            <Text style={styles.price}>${listing.price}</Text>
+          </View>
+          <ListItem
+            image={require("../assets/macri.jpg")}
+            title={"Macri Liberal"}
+            subtitle={"5 Listings"}
+          />
+          <ContactSellerForm listing={listing} />
+        </Screen>
+      </KeyboardAvoidingView>
+    </ScrollView>
   );
 }
 
@@ -29,6 +50,11 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: defaultStyles.colors.lightBackground,
     height: "100%",
+  },
+  form: {
+    marginHorizontal: "5%",
+    alignItems: "center",
+    justifyContent: "center",
   },
   image: {
     width: "100%",

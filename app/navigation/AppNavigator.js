@@ -3,17 +3,18 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import ListingEditScreen from "../screens/ListingEditScreen";
-import TabBarButton from "../components/TabBarButton";
-import Icon from "../components/Icon";
 import colors from "../config/colors";
 import ListingsNavigator from "./ListingsNavigator";
 import AccountNavigator from "./AccountNavigator";
 import NewListingButton from "./NewListingButton";
 import routes from "./routes";
+import useNotifications from "../hooks/useNotifications";
 
 const Tab = createBottomTabNavigator();
 
 export default AppNavigator = () => {
+  useNotifications();
+
   return (
     <Tab.Navigator
       initialRouteName={routes.FEED}

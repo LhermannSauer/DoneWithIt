@@ -3,8 +3,20 @@ import { StyleSheet, Image } from "react-native";
 import * as Yup from "yup";
 
 import Screen from "../components/Screen";
-import { FormField, Form, SubmitButton } from "../components/forms";
+import {
+  FormField,
+  Form,
+  SubmitButton,
+  ErrorMessage,
+} from "../components/forms";
 import defaultStyles from "../config/styles";
+import useAuth from "../auth/useAuth";
+import usersApi from "../api/users";
+import authApi from "../api/auth";
+import { useState } from "react";
+import useApi from "../hooks/useApi";
+import ActivityIndicator from "../components/ActivityIndicator";
+import logger from "../utility/log";
 
 const validationSchema = Yup.object().shape({
   name: Yup.string().min(3).required().trim().label("Name"),
@@ -12,17 +24,41 @@ const validationSchema = Yup.object().shape({
   password: Yup.string().min(7).required().trim().label("Password"),
 });
 
-function RegisterScreen({ navigation }) {
+function RegisterScreen() {
+  const registerApi = useApi(usersApi.register);
+  const loginApi = useApi(authApi.login);
+  const auth = useAuth();
+  const [error, setError] = useState();
+
+  const handleSubmit = async (userInfo) => {
+    const result = await registerApi.request(userInfo);
+
+    if (!result.ok) {
+      if (result.data) setError(result.data.error);
+      else {
+        setError("An unexpected Error ocurred.");
+        logger.log(result);
+      }
+      return;
+    }
+
+    const { data: authToken } = await loginApi.request(
+      userInfo.email,
+      userInfo.password
+    );
+    auth.logIn(authToken);
+  };
+
   return (
     <Screen style={styles.container}>
+      <ActivityIndicator visible={registerApi.loading || loginApi.loading} />
       <Image source={require("../assets/logo-red.png")} style={styles.logo} />
       <Form
         initialValues={{ name: "", email: "", password: "" }}
-        onSubmit={(values) => {
-          console.log(values);
-        }}
+        onSubmit={handleSubmit}
         validationSchema={validationSchema}
       >
+        <ErrorMessage error={error} visible={error} />
         <FormField
           allowFontScaling
           autoCapitalize="words"

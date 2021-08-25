@@ -3,21 +3,38 @@
     "name": "DoneWithIt",
     "slug": "DoneWithIt",
     "version": "1.0.0",
+    "privacy": "unlisted",
     "orientation": "portrait",
     "icon": "./app/assets/icon.png",
     "splash": {
       "image": "./app/assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "resizeMode": "cover",
+      "backgroundColor": "#E63C4B"
+    },
+    "hooks": {
+      "postPublish": [
+        {
+          "file": "sentry-expo/upload-sourcemaps",
+          "config": {
+            "organization": "Me",
+            "project": "donewithit",
+            "authToken": "b5a05ed2053f11eca673d20204ba4ae1"
+          }
+        }
+      ]
     },
     "updates": {
       "fallbackToCacheTimeout": 0
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.lhermannsauer.donewithit",
+      "buildNumber": "1.0.0"
     },
     "android": {
+      "package": "com.lhermannsauer.donewithit",
+      "versionCode": 2,
       "adaptiveIcon": {
         "foregroundImage": "./app/assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
@@ -25,6 +42,7 @@
     },
     "web": {
       "favicon": "./app/assets/favicon.png"
-    }
+    },
+    "plugins": ["sentry-expo"]
   }
 }

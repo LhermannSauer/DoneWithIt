@@ -56,6 +56,7 @@ function ListingsScreen({ navigation }) {
                 title={item.title}
                 subtitle={`$ ${item.price}`}
                 imageUrl={item.images[0].url}
+                thumbnailUrl={item.images[0].thumbnailUrl}
               />
             </View>
           </TouchableWithoutFeedback>

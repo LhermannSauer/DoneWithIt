@@ -8,6 +8,7 @@ import Screen from "../components/Screen";
 import Icon from "../components/Icon";
 import ListItemSeparator from "../components/lists/ListItemSeparator";
 import routes from "../navigation/routes";
+import useAuth from "../auth/useAuth";
 
 const menuItems = [
   {
@@ -41,12 +42,14 @@ const menuItems = [
 ];
 
 function AccountScreen({ navigation }) {
+  const { user, logOut } = useAuth();
+
   return (
     <Screen style={styles.container}>
       <ListItem
         image={require("../assets/macri.jpg")}
-        title={"Macri Liberal"}
-        subtitle={"ahperomacri@tugobierno.com"}
+        title={user.name}
+        subtitle={user.email}
         style={styles.user}
       />
       <View>
@@ -74,7 +77,9 @@ function AccountScreen({ navigation }) {
 
       <ListItem
         title="Log Out"
-        onPress={() => navigation.navigate("Auth")}
+        onPress={() => {
+          logOut();
+        }}
         Icon={() => (
           <Icon
             backgroundColor={defaultStyles.colors.yellow}
