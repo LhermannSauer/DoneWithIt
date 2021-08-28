@@ -9,6 +9,8 @@ import authStorage from "./app/auth/storage";
 import AppLoading from "expo-app-loading";
 import { navigationRef } from "./app/navigation/rootNavigation";
 import logger from "./app/utility/log";
+import ChatScreen from "./app/screens/ChatScreen";
+import Message from "./app/components/Message";
 
 logger.start();
 
