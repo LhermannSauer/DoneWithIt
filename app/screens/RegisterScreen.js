@@ -23,7 +23,6 @@ const validationSchema = Yup.object().shape({
   username: Yup.string().min(3).required().trim().label("Name"),
   email: Yup.string().email().required().trim().label("E-mail"),
   password: Yup.string().min(7).required().trim().label("Password"),
-  // images: Yup.array().max(1).min(1),
 });
 
 function RegisterScreen() {
@@ -67,7 +66,7 @@ function RegisterScreen() {
           allowFontScaling
           autoCapitalize="words"
           icon="account"
-          username="username"
+          name="username"
           placeholder="username"
           textContentType="username"
         />
