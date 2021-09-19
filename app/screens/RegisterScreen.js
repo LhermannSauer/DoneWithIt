@@ -19,7 +19,7 @@ import ActivityIndicator from "../components/ActivityIndicator";
 import logger from "../utility/log";
 
 const validationSchema = Yup.object().shape({
-  name: Yup.string().min(3).required().trim().label("Name"),
+  username: Yup.string().min(3).required().trim().label("Name"),
   email: Yup.string().email().required().trim().label("E-mail"),
   password: Yup.string().min(7).required().trim().label("Password"),
 });
@@ -54,7 +54,7 @@ function RegisterScreen() {
       <ActivityIndicator visible={registerApi.loading || loginApi.loading} />
       <Image source={require("../assets/logo-red.png")} style={styles.logo} />
       <Form
-        initialValues={{ name: "", email: "", password: "" }}
+        initialValues={{ username: "", email: "", password: "" }}
         onSubmit={handleSubmit}
         validationSchema={validationSchema}
       >
@@ -63,8 +63,8 @@ function RegisterScreen() {
           allowFontScaling
           autoCapitalize="words"
           icon="account"
-          name="name"
-          placeholder="name"
+          name="username"
+          placeholder="username"
           textContentType="username"
         />
         <FormField
