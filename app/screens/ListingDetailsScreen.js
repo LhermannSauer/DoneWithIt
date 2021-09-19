@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Text,
   View,
@@ -10,12 +10,20 @@ import {
 import { Image } from "react-native-expo-image-cache";
 import defaultStyles from "../config/styles";
 
+import categoriesApi from "../api/categories";
+
 import ListItem from "../components/lists/ListItem";
 import Screen from "../components/Screen";
 import ContactSellerForm from "../components/ContactSellerForm";
 
 function ListingDetailsScreen({ route }) {
   const listing = route.params.listing;
+  const { user } = useAuth();
+  const getCategory = useApi(categoriesApi.getCategoryById);
+
+  useEffect(() => {
+    getCategory.request(listing.categoryId);
+  }, []);
 
   return (
     <ScrollView keyboardShouldPersistTaps="handled">
@@ -31,12 +39,13 @@ function ListingDetailsScreen({ route }) {
             preview={{ uri: listing.images[0].thumbnailUrl }}
           />
           <View style={styles.textContainer}>
+            <Text style={styles.category}>{getCategory.data.name}</Text>
             <Text style={styles.title}>{listing.title}</Text>
             <Text style={styles.price}>${listing.price}</Text>
           </View>
           <ListItem
-            image={require("../assets/macri.jpg")}
-            title={"Macri Liberal"}
+            image={require("../assets/leandro.jpg")}
+            title={user.name}
             subtitle={"5 Listings"}
           />
           <ContactSellerForm listing={listing} />
