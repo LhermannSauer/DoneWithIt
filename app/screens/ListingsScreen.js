@@ -44,7 +44,7 @@ function ListingsScreen({ navigation }) {
         data={listings}
         refreshing={refreshing}
         onRefresh={() => loadListings()}
-        keyExtractor={(item) => item.id.toString()}
+        keyExtractor={(item) => item._id}
         renderItem={({ item }) => (
           <TouchableWithoutFeedback
             onPress={() =>

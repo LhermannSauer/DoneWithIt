@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Image } from "react-native";
+import { StyleSheet, Image, View } from "react-native";
 import * as Yup from "yup";
 
 import Screen from "../components/Screen";
@@ -8,6 +8,7 @@ import {
   Form,
   SubmitButton,
   ErrorMessage,
+  FormImagePicker,
 } from "../components/forms";
 import defaultStyles from "../config/styles";
 import useAuth from "../auth/useAuth";
@@ -19,9 +20,10 @@ import ActivityIndicator from "../components/ActivityIndicator";
 import logger from "../utility/log";
 
 const validationSchema = Yup.object().shape({
-  name: Yup.string().min(3).required().trim().label("Name"),
+  username: Yup.string().min(3).required().trim().label("Name"),
   email: Yup.string().email().required().trim().label("E-mail"),
   password: Yup.string().min(7).required().trim().label("Password"),
+  // images: Yup.array().max(1).min(1),
 });
 
 function RegisterScreen() {
@@ -31,6 +33,7 @@ function RegisterScreen() {
   const [error, setError] = useState();
 
   const handleSubmit = async (userInfo) => {
+    console.log(userInfo);
     const result = await registerApi.request(userInfo);
 
     if (!result.ok) {
@@ -54,17 +57,18 @@ function RegisterScreen() {
       <ActivityIndicator visible={registerApi.loading || loginApi.loading} />
       <Image source={require("../assets/logo-red.png")} style={styles.logo} />
       <Form
-        initialValues={{ name: "", email: "", password: "" }}
+        initialValues={{ username: "", email: "", password: "" }}
         onSubmit={handleSubmit}
         validationSchema={validationSchema}
       >
         <ErrorMessage error={error} visible={error} />
+
         <FormField
           allowFontScaling
           autoCapitalize="words"
           icon="account"
-          name="name"
-          placeholder="name"
+          username="username"
+          placeholder="username"
           textContentType="username"
         />
         <FormField

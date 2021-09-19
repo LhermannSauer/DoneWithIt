@@ -37,6 +37,7 @@ const styles = StyleSheet.create({
   },
   image: {
     margin: 5,
+    backgroundColor: "#CCC",
   },
 });
 
